@@ -248,6 +248,7 @@ type Product {
   photo: ProductImage
   status: String
   price: Int
+  weight: Int
   user: User
 }
 
@@ -322,6 +323,14 @@ input ProductWhereInput {
   price_gte: Int
   price_in: [Int]
   price_not_in: [Int]
+  weight: Int
+  weight_not: Int
+  weight_lt: Int
+  weight_lte: Int
+  weight_gt: Int
+  weight_gte: Int
+  weight_in: [Int]
+  weight_not_in: [Int]
   user: UserWhereInput
   user_is_null: Boolean
 }
@@ -343,6 +352,8 @@ enum SortProductsBy {
   status_DESC
   price_ASC
   price_DESC
+  weight_ASC
+  weight_DESC
   user_ASC
   user_DESC
 }
@@ -353,6 +364,7 @@ input ProductUpdateInput {
   photo: ProductImageRelateToOneInput
   status: String
   price: Int
+  weight: Int
   user: UserRelateToOneInput
 }
 
@@ -367,6 +379,7 @@ input ProductCreateInput {
   photo: ProductImageRelateToOneInput
   status: String
   price: Int
+  weight: Int
   user: UserRelateToOneInput
 }
 

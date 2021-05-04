@@ -296,6 +296,14 @@ export type ProductWhereInput = {
   readonly price_gte?: Scalars['Int'] | null;
   readonly price_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly price_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly weight?: Scalars['Int'] | null;
+  readonly weight_not?: Scalars['Int'] | null;
+  readonly weight_lt?: Scalars['Int'] | null;
+  readonly weight_lte?: Scalars['Int'] | null;
+  readonly weight_gt?: Scalars['Int'] | null;
+  readonly weight_gte?: Scalars['Int'] | null;
+  readonly weight_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly weight_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly user?: UserWhereInput | null;
   readonly user_is_null?: Scalars['Boolean'] | null;
 };
@@ -317,6 +325,8 @@ export type SortProductsBy =
   | 'status_DESC'
   | 'price_ASC'
   | 'price_DESC'
+  | 'weight_ASC'
+  | 'weight_DESC'
   | 'user_ASC'
   | 'user_DESC';
 
@@ -326,6 +336,7 @@ export type ProductUpdateInput = {
   readonly photo?: ProductImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
+  readonly weight?: Scalars['Int'] | null;
   readonly user?: UserRelateToOneInput | null;
 };
 
@@ -340,6 +351,7 @@ export type ProductCreateInput = {
   readonly photo?: ProductImageRelateToOneInput | null;
   readonly status?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
+  readonly weight?: Scalars['Int'] | null;
   readonly user?: UserRelateToOneInput | null;
 };
 
@@ -923,7 +935,15 @@ export type UserListFn = (
 
 export type ProductListTypeInfo = {
   key: 'Product';
-  fields: 'id' | 'name' | 'description' | 'photo' | 'status' | 'price' | 'user';
+  fields:
+    | 'id'
+    | 'name'
+    | 'description'
+    | 'photo'
+    | 'status'
+    | 'price'
+    | 'weight'
+    | 'user';
   backing: {
     readonly id: string;
     readonly name?: string | null;
@@ -931,6 +951,7 @@ export type ProductListTypeInfo = {
     readonly photo?: string | null;
     readonly status?: string | null;
     readonly price?: number | null;
+    readonly weight?: number | null;
     readonly user?: string | null;
   };
   inputs: {
