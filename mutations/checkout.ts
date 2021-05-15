@@ -53,7 +53,11 @@ async function checkout(
   // TODO: ADD SHIPPING FUNCTION CALL TO SHIPENGINE HERE
 
   function reducer(tally: number, cartItem: CartItemCreateInput) {
-    return tally + cartItem.quantity * cartItem.product.price;
+    return (
+      tally +
+      cartItem.quantity *
+      (cartItem.product.price + cartItem.product.shippingPrice)
+    );
   }
   const amount = cartItems.reduce(reducer, 0);
   console.log(amount);

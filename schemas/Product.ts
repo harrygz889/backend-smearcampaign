@@ -38,7 +38,7 @@ export const Product = list({
       },
     }),
     price: integer(),
-    weight: integer(),
+    shippingPrice: integer(),
     user: relationship({
       ref: 'User.products',
       defaultValue: ({ context }) => ({
