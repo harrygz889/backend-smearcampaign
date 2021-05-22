@@ -7,11 +7,13 @@ import stripeConfig from '../lib/stripe';
 
 interface Arguments {
   token: string;
+  address: string;
 }
 
+// add address argrument here somehow
 async function checkout(
   root: any,
-  { token }: Arguments,
+  { token, address }: Arguments,
   context: KeystoneContext
 ): Promise<OrderCreateInput> {
   // 1. make sure they are signed in
@@ -32,7 +34,7 @@ async function checkout(
         product {
           name
           price
-          weight
+          shippingPrice
           description
           id
           photo {
@@ -81,6 +83,7 @@ async function checkout(
       name: cartItem.product.name,
       description: cartItem.product.description,
       price: cartItem.product.price,
+      shippingPrice: cartItem.product.shippingPrice,
       quantity: cartItem.quantity,
       photo: { connect: { id: cartItem.product.photo.id } },
     };
@@ -94,6 +97,7 @@ async function checkout(
       // creates the items before creating the reference
       items: { create: orderItems },
       user: { connect: { id: userId } },
+      address,
     },
   });
   // 6. clean up any old cart items

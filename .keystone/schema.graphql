@@ -597,6 +597,7 @@ type OrderItem {
   description: String
   photo: ProductImage
   price: Int
+  shippingPrice: Int
   quantity: Int
   order: Order
 }
@@ -654,6 +655,14 @@ input OrderItemWhereInput {
   price_gte: Int
   price_in: [Int]
   price_not_in: [Int]
+  shippingPrice: Int
+  shippingPrice_not: Int
+  shippingPrice_lt: Int
+  shippingPrice_lte: Int
+  shippingPrice_gt: Int
+  shippingPrice_gte: Int
+  shippingPrice_in: [Int]
+  shippingPrice_not_in: [Int]
   quantity: Int
   quantity_not: Int
   quantity_lt: Int
@@ -681,6 +690,8 @@ enum SortOrderItemsBy {
   photo_DESC
   price_ASC
   price_DESC
+  shippingPrice_ASC
+  shippingPrice_DESC
   quantity_ASC
   quantity_DESC
   order_ASC
@@ -692,6 +703,7 @@ input OrderItemUpdateInput {
   description: String
   photo: ProductImageRelateToOneInput
   price: Int
+  shippingPrice: Int
   quantity: Int
   order: OrderRelateToOneInput
 }
@@ -706,6 +718,7 @@ input OrderItemCreateInput {
   description: String
   photo: ProductImageRelateToOneInput
   price: Int
+  shippingPrice: Int
   quantity: Int
   order: OrderRelateToOneInput
 }
@@ -730,6 +743,7 @@ type Order {
   _itemsMeta(where: OrderItemWhereInput, search: String, sortBy: [SortOrderItemsBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
   user: User
   charge: String
+  address: String
 }
 
 input OrderWhereInput {
@@ -776,6 +790,24 @@ input OrderWhereInput {
   charge_not_ends_with_i: String
   charge_in: [String]
   charge_not_in: [String]
+  address: String
+  address_not: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  address_i: String
+  address_not_i: String
+  address_contains_i: String
+  address_not_contains_i: String
+  address_starts_with_i: String
+  address_not_starts_with_i: String
+  address_ends_with_i: String
+  address_not_ends_with_i: String
+  address_in: [String]
+  address_not_in: [String]
 }
 
 input OrderWhereUniqueInput {
@@ -793,6 +825,8 @@ enum SortOrdersBy {
   user_DESC
   charge_ASC
   charge_DESC
+  address_ASC
+  address_DESC
 }
 
 input OrderUpdateInput {
@@ -800,6 +834,7 @@ input OrderUpdateInput {
   items: OrderItemRelateToManyInput
   user: UserRelateToOneInput
   charge: String
+  address: String
 }
 
 input OrdersUpdateInput {
@@ -812,6 +847,7 @@ input OrderCreateInput {
   items: OrderItemRelateToManyInput
   user: UserRelateToOneInput
   charge: String
+  address: String
 }
 
 input OrdersCreateInput {
@@ -1354,7 +1390,7 @@ type Mutation {
   sendUserPasswordResetLink(email: String!): SendUserPasswordResetLinkResult
   redeemUserPasswordResetToken(email: String!, token: String!, password: String!): RedeemUserPasswordResetTokenResult
   addToCart(productId: ID): CartItem
-  checkout(token: String!): Order
+  checkout(token: String!, address: String!): Order
   endSession: Boolean!
 }
 

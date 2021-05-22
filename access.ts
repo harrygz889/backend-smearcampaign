@@ -19,7 +19,7 @@ const generatedPermissions = Object.fromEntries(
 export const permissions = {
   ...generatedPermissions,
   isAwesome({ session }: ListAccessArgs): boolean {
-    return session?.data.name.includes('wes');
+    return session?.data.name.includes('harryzumwalt');
   },
 };
 
@@ -30,12 +30,14 @@ export const rules = {
     if (!isSignedIn({ session })) {
       return false;
     }
-    // 1. Do they have the permission of canManageProducts
-    if (permissions.canManageProducts({ session })) {
-      return true;
-    }
     // 2. If not, do they own this item?
     return { user: { id: session.itemId } };
+  },
+  canCreateStuff({ session }: ListAccessArgs) {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    return { user: { id: '606211f61fe3a9352eba3eba' } };
   },
   canOrder({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
@@ -69,9 +71,6 @@ export const rules = {
   canManageUsers({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;
-    }
-    if (permissions.canManageUsers({ session })) {
-      return true;
     }
     // Otherwise they may only update themselves!
     return { id: session.itemId };

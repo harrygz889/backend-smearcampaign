@@ -580,6 +580,14 @@ export type OrderItemWhereInput = {
   readonly price_gte?: Scalars['Int'] | null;
   readonly price_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly price_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly shippingPrice?: Scalars['Int'] | null;
+  readonly shippingPrice_not?: Scalars['Int'] | null;
+  readonly shippingPrice_lt?: Scalars['Int'] | null;
+  readonly shippingPrice_lte?: Scalars['Int'] | null;
+  readonly shippingPrice_gt?: Scalars['Int'] | null;
+  readonly shippingPrice_gte?: Scalars['Int'] | null;
+  readonly shippingPrice_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly shippingPrice_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly quantity?: Scalars['Int'] | null;
   readonly quantity_not?: Scalars['Int'] | null;
   readonly quantity_lt?: Scalars['Int'] | null;
@@ -607,6 +615,8 @@ export type SortOrderItemsBy =
   | 'photo_DESC'
   | 'price_ASC'
   | 'price_DESC'
+  | 'shippingPrice_ASC'
+  | 'shippingPrice_DESC'
   | 'quantity_ASC'
   | 'quantity_DESC'
   | 'order_ASC'
@@ -617,6 +627,7 @@ export type OrderItemUpdateInput = {
   readonly description?: Scalars['String'] | null;
   readonly photo?: ProductImageRelateToOneInput | null;
   readonly price?: Scalars['Int'] | null;
+  readonly shippingPrice?: Scalars['Int'] | null;
   readonly quantity?: Scalars['Int'] | null;
   readonly order?: OrderRelateToOneInput | null;
 };
@@ -631,6 +642,7 @@ export type OrderItemCreateInput = {
   readonly description?: Scalars['String'] | null;
   readonly photo?: ProductImageRelateToOneInput | null;
   readonly price?: Scalars['Int'] | null;
+  readonly shippingPrice?: Scalars['Int'] | null;
   readonly quantity?: Scalars['Int'] | null;
   readonly order?: OrderRelateToOneInput | null;
 };
@@ -684,6 +696,24 @@ export type OrderWhereInput = {
   readonly charge_not_ends_with_i?: Scalars['String'] | null;
   readonly charge_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly charge_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly address?: Scalars['String'] | null;
+  readonly address_not?: Scalars['String'] | null;
+  readonly address_contains?: Scalars['String'] | null;
+  readonly address_not_contains?: Scalars['String'] | null;
+  readonly address_starts_with?: Scalars['String'] | null;
+  readonly address_not_starts_with?: Scalars['String'] | null;
+  readonly address_ends_with?: Scalars['String'] | null;
+  readonly address_not_ends_with?: Scalars['String'] | null;
+  readonly address_i?: Scalars['String'] | null;
+  readonly address_not_i?: Scalars['String'] | null;
+  readonly address_contains_i?: Scalars['String'] | null;
+  readonly address_not_contains_i?: Scalars['String'] | null;
+  readonly address_starts_with_i?: Scalars['String'] | null;
+  readonly address_not_starts_with_i?: Scalars['String'] | null;
+  readonly address_ends_with_i?: Scalars['String'] | null;
+  readonly address_not_ends_with_i?: Scalars['String'] | null;
+  readonly address_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly address_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
 };
 
 export type OrderWhereUniqueInput = {
@@ -700,13 +730,16 @@ export type SortOrdersBy =
   | 'user_ASC'
   | 'user_DESC'
   | 'charge_ASC'
-  | 'charge_DESC';
+  | 'charge_DESC'
+  | 'address_ASC'
+  | 'address_DESC';
 
 export type OrderUpdateInput = {
   readonly total?: Scalars['Int'] | null;
   readonly items?: OrderItemRelateToManyInput | null;
   readonly user?: UserRelateToOneInput | null;
   readonly charge?: Scalars['String'] | null;
+  readonly address?: Scalars['String'] | null;
 };
 
 export type OrdersUpdateInput = {
@@ -719,6 +752,7 @@ export type OrderCreateInput = {
   readonly items?: OrderItemRelateToManyInput | null;
   readonly user?: UserRelateToOneInput | null;
   readonly charge?: Scalars['String'] | null;
+  readonly address?: Scalars['String'] | null;
 };
 
 export type OrdersCreateInput = {
@@ -1055,6 +1089,7 @@ export type OrderItemListTypeInfo = {
     | 'description'
     | 'photo'
     | 'price'
+    | 'shippingPrice'
     | 'quantity'
     | 'order';
   backing: {
@@ -1063,6 +1098,7 @@ export type OrderItemListTypeInfo = {
     readonly description?: string | null;
     readonly photo?: string | null;
     readonly price?: number | null;
+    readonly shippingPrice?: number | null;
     readonly quantity?: number | null;
     readonly order?: string | null;
   };
@@ -1093,13 +1129,14 @@ export type OrderItemListFn = (
 
 export type OrderListTypeInfo = {
   key: 'Order';
-  fields: 'id' | 'label' | 'total' | 'items' | 'user' | 'charge';
+  fields: 'id' | 'label' | 'total' | 'items' | 'user' | 'charge' | 'address';
   backing: {
     readonly id: string;
     readonly total?: number | null;
     readonly items?: string | null;
     readonly user?: string | null;
     readonly charge?: string | null;
+    readonly address?: string | null;
   };
   inputs: {
     where: OrderWhereInput;
