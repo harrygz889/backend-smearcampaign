@@ -19,7 +19,7 @@ export const User = list({
   fields: {
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
-    password: password(),
+    password: password({ isRequired: true, minLength: 8 }),
     cart: relationship({
       ref: 'CartItem.user',
       many: true,

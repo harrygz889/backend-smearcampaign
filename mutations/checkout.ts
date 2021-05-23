@@ -31,6 +31,7 @@ async function checkout(
       cart {
         id
         quantity
+        size
         product {
           name
           price
@@ -81,6 +82,7 @@ async function checkout(
   const orderItems = cartItems.map((cartItem) => {
     const orderItem = {
       name: cartItem.product.name,
+      size: cartItem.size,
       description: cartItem.product.description,
       price: cartItem.product.price,
       shippingPrice: cartItem.product.shippingPrice,

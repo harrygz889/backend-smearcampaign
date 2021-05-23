@@ -5,9 +5,14 @@ import { Session } from '../types';
 
 import { CartItemCreateInput } from '../.keystone/schema-types';
 
+interface Arguments {
+  productId: string;
+  size: string;
+}
+
 async function addToCart(
   root: any,
-  { productId }: { productId: string },
+  { productId, size }: Arguments,
   context: KeystoneContext
 ): Promise<CartItemCreateInput> {
   console.log('ADDING TO CART!');
@@ -16,9 +21,10 @@ async function addToCart(
   if (!sesh.itemId) {
     throw new Error('You must be logged in to do this!');
   }
+  console.log('itemSize: ', size)
   // 2. Query the current users cart
   const allCartItems = await context.lists.CartItem.findMany({
-    where: { user: { id: sesh.itemId }, product: { id: productId } },
+    where: { user: { id: sesh.itemId }, product: { id: productId }, size: size },
     resolveFields: 'id,quantity'
   });
 
@@ -41,6 +47,7 @@ async function addToCart(
     data: {
       product: { connect: { id: productId } },
       user: { connect: { id: sesh.itemId } },
+      size: size,
     },
     resolveFields: false,
   })

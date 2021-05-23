@@ -483,6 +483,24 @@ export type CartItemWhereInput = {
   readonly product_is_null?: Scalars['Boolean'] | null;
   readonly user?: UserWhereInput | null;
   readonly user_is_null?: Scalars['Boolean'] | null;
+  readonly size?: Scalars['String'] | null;
+  readonly size_not?: Scalars['String'] | null;
+  readonly size_contains?: Scalars['String'] | null;
+  readonly size_not_contains?: Scalars['String'] | null;
+  readonly size_starts_with?: Scalars['String'] | null;
+  readonly size_not_starts_with?: Scalars['String'] | null;
+  readonly size_ends_with?: Scalars['String'] | null;
+  readonly size_not_ends_with?: Scalars['String'] | null;
+  readonly size_i?: Scalars['String'] | null;
+  readonly size_not_i?: Scalars['String'] | null;
+  readonly size_contains_i?: Scalars['String'] | null;
+  readonly size_not_contains_i?: Scalars['String'] | null;
+  readonly size_starts_with_i?: Scalars['String'] | null;
+  readonly size_not_starts_with_i?: Scalars['String'] | null;
+  readonly size_ends_with_i?: Scalars['String'] | null;
+  readonly size_not_ends_with_i?: Scalars['String'] | null;
+  readonly size_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly size_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
 };
 
 export type CartItemWhereUniqueInput = {
@@ -497,12 +515,15 @@ export type SortCartItemsBy =
   | 'product_ASC'
   | 'product_DESC'
   | 'user_ASC'
-  | 'user_DESC';
+  | 'user_DESC'
+  | 'size_ASC'
+  | 'size_DESC';
 
 export type CartItemUpdateInput = {
   readonly quantity?: Scalars['Int'] | null;
   readonly product?: ProductRelateToOneInput | null;
   readonly user?: UserRelateToOneInput | null;
+  readonly size?: Scalars['String'] | null;
 };
 
 export type CartItemsUpdateInput = {
@@ -514,6 +535,7 @@ export type CartItemCreateInput = {
   readonly quantity?: Scalars['Int'] | null;
   readonly product?: ProductRelateToOneInput | null;
   readonly user?: UserRelateToOneInput | null;
+  readonly size?: Scalars['String'] | null;
 };
 
 export type CartItemsCreateInput = {
@@ -596,6 +618,24 @@ export type OrderItemWhereInput = {
   readonly quantity_gte?: Scalars['Int'] | null;
   readonly quantity_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly quantity_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly size?: Scalars['String'] | null;
+  readonly size_not?: Scalars['String'] | null;
+  readonly size_contains?: Scalars['String'] | null;
+  readonly size_not_contains?: Scalars['String'] | null;
+  readonly size_starts_with?: Scalars['String'] | null;
+  readonly size_not_starts_with?: Scalars['String'] | null;
+  readonly size_ends_with?: Scalars['String'] | null;
+  readonly size_not_ends_with?: Scalars['String'] | null;
+  readonly size_i?: Scalars['String'] | null;
+  readonly size_not_i?: Scalars['String'] | null;
+  readonly size_contains_i?: Scalars['String'] | null;
+  readonly size_not_contains_i?: Scalars['String'] | null;
+  readonly size_starts_with_i?: Scalars['String'] | null;
+  readonly size_not_starts_with_i?: Scalars['String'] | null;
+  readonly size_ends_with_i?: Scalars['String'] | null;
+  readonly size_not_ends_with_i?: Scalars['String'] | null;
+  readonly size_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly size_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly order?: OrderWhereInput | null;
   readonly order_is_null?: Scalars['Boolean'] | null;
 };
@@ -619,6 +659,8 @@ export type SortOrderItemsBy =
   | 'shippingPrice_DESC'
   | 'quantity_ASC'
   | 'quantity_DESC'
+  | 'size_ASC'
+  | 'size_DESC'
   | 'order_ASC'
   | 'order_DESC';
 
@@ -629,6 +671,7 @@ export type OrderItemUpdateInput = {
   readonly price?: Scalars['Int'] | null;
   readonly shippingPrice?: Scalars['Int'] | null;
   readonly quantity?: Scalars['Int'] | null;
+  readonly size?: Scalars['String'] | null;
   readonly order?: OrderRelateToOneInput | null;
 };
 
@@ -644,6 +687,7 @@ export type OrderItemCreateInput = {
   readonly price?: Scalars['Int'] | null;
   readonly shippingPrice?: Scalars['Int'] | null;
   readonly quantity?: Scalars['Int'] | null;
+  readonly size?: Scalars['String'] | null;
   readonly order?: OrderRelateToOneInput | null;
 };
 
@@ -1049,12 +1093,13 @@ export type ProductImageListFn = (
 
 export type CartItemListTypeInfo = {
   key: 'CartItem';
-  fields: 'id' | 'quantity' | 'product' | 'user';
+  fields: 'id' | 'quantity' | 'product' | 'user' | 'size';
   backing: {
     readonly id: string;
     readonly quantity?: number | null;
     readonly product?: string | null;
     readonly user?: string | null;
+    readonly size?: string | null;
   };
   inputs: {
     where: CartItemWhereInput;
@@ -1091,6 +1136,7 @@ export type OrderItemListTypeInfo = {
     | 'price'
     | 'shippingPrice'
     | 'quantity'
+    | 'size'
     | 'order';
   backing: {
     readonly id: string;
@@ -1100,6 +1146,7 @@ export type OrderItemListTypeInfo = {
     readonly price?: number | null;
     readonly shippingPrice?: number | null;
     readonly quantity?: number | null;
+    readonly size?: string | null;
     readonly order?: string | null;
   };
   inputs: {

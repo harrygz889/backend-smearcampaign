@@ -16,6 +16,11 @@ export const Order = list({
     update: () => false,
     delete: () => false,
   },
+  ui: {
+    listView: {
+      initialColumns: ['address', 'user', 'charge'],
+    },
+  },
   fields: {
     label: virtual({
       graphQLReturnType: 'String',
